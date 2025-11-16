@@ -1,7 +1,4 @@
 repos:
-  - owner: tensorflow
-    name: tensorflow
-    positioning: performance
   - owner: scikit-learn
     name: scikit-learn
     positioning: performance
@@ -16,9 +13,6 @@ repos:
     positioning: simplicity
   - owner: matplotlib
     name: matplotlib
-    positioning: simplicity
-  - owner: mwaskom
-    name: seaborn
     positioning: simplicity
   - owner: plotly
     name: plotly.py

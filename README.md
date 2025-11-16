@@ -16,7 +16,7 @@
 
 **Alternative Hypothesis:** Performance-related repositories have a higher contributor concentration than simplicity-related repositories.
 
-**Reasoning:** Performance-related repositories may require larger teams and have more diversity of contributors, but we will test this with hypothesis testing.
+**Reasoning:** Performance-related repositories may require a small team of experts while simplicity-related repositories may have more diverse contributors as these packages can be used casually, but we will test this with hypothesis testing.
 
 ---
 

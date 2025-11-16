@@ -1,6 +1,6 @@
 repos:
-  - owner: pytorch
-    name: pytorch
+  - owner: tensorflow
+    name: tensorflow
     positioning: performance
   - owner: scikit-learn
     name: scikit-learn

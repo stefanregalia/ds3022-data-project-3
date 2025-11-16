@@ -19,6 +19,16 @@ logger = logging.getLogger(__name__)
 # Defining the database path
 DB_PATH = DATA_DIR / "github_evolution.duckdb"
 
+# Auto-initialize database 
+def ensure_database_exists():
+    """Creating database and tables if they don't exist."""
+    if not DB_PATH.exists():
+        logger.info("Database not found. Initializing...")
+        from init_db import init_database
+        init_database()
+
+ensure_database_exists()
+
 # Task definitions
 @task(retries=3, retry_delay_seconds=60)
 def fetch_repo_commits(owner: str, name: str, max_pages: int = 10) -> List[Dict]:
@@ -123,7 +133,7 @@ def save_commits_to_db(commits: List[Dict], repo_id: int, owner: str, name: str)
         raise
 
 @flow(name="Ingest GitHub Commits")
-def ingest_commits_flow(max_pages: int = 10):
+def ingest_commits_flow(max_pages: int = 200):
     """Flow to ingest commits from all repos."""
     try:
         repos = load_repos()

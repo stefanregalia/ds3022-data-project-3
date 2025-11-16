@@ -7,6 +7,7 @@ from prefect import flow, task
 from typing import List, Dict, Optional
 from config import load_repos, DATA_DIR
 from github_client import client
+import sys
 
 # Setting up the logger
 logging.basicConfig(
@@ -14,6 +15,10 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.INFO)
+logger.addHandler(handler)
 
 # Defining the database path
 DB_PATH = DATA_DIR / "github_evolution.duckdb"
@@ -141,33 +146,36 @@ def ingest_prs_flow(max_pages: int = 200):
     
     try:
         repos = load_repos()
-        logger.info(f"Starting PR ingestion for {len(repos)} repositories")
-        logger.info(f"Max pages per repo: {max_pages}")
+        print(f"Starting PR ingestion for {len(repos)} repositories") 
+        print(f"Max pages per repo: {max_pages}") 
         
         for repo in repos:
             owner = repo["owner"]
             name = repo["name"]
             positioning = repo["positioning"]
             
-            logger.info(f"\n{'='*60}")
-            logger.info(f"Processing PRs for {owner}/{name} ({positioning})")
-            logger.info(f"{'='*60}")
+            print(f"\n{'='*60}") 
+            print(f"Processing PRs for {owner}/{name} ({positioning})") 
+            print(f"{'='*60}")
             
             # Getting repo_id
+            print(f"Task 1/3: Looking up repository ID") 
             repo_id = get_repo_id(owner, name)
             
             # Fetching PRs
+            print(f"Task 2/3: Fetching pull requests from GitHub API") 
             prs = fetch_repo_prs(owner, name, max_pages)
             total_prs += len(prs)
             
             # Saving to database
+            print(f"Task 3/3: Saving pull requests to database") 
             save_prs_to_db(prs, repo_id, owner, name)
         
-        logger.info(f"\n{'='*60}")
-        logger.info(f"PR Ingestion Complete")
-        logger.info(f"Total repos processed: {len(repos)}")
-        logger.info(f"Total PRs fetched: {total_prs}")
-        logger.info(f"{'='*60}")
+        print(f"\n{'='*60}") 
+        print(f"PR Ingestion Complete")
+        print(f"Total repos processed: {len(repos)}")
+        print(f"Total PRs fetched: {total_prs}") 
+        print(f"{'='*60}") 
         
     except Exception as e:
         logger.error(f"PR Ingestion failed: {str(e)}")

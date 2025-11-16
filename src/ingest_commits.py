@@ -8,6 +8,8 @@ from datetime import datetime
 from typing import List, Dict
 from config import load_repos, DATA_DIR
 from github_client import client
+import sys
+
 
 # Defining the logger
 logging.basicConfig(
@@ -15,6 +17,11 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Adding stream handler to output logs to stdout
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.INFO)
+logger.addHandler(handler)
 
 # Defining the database path
 DB_PATH = DATA_DIR / "github_evolution.duckdb"
@@ -137,29 +144,32 @@ def ingest_commits_flow(max_pages: int = 200):
     """Flow to ingest commits from all repos."""
     try:
         repos = load_repos()
-        logger.info(f"Starting ingestion for {len(repos)} repositories")
+        print(f"Starting ingestion for {len(repos)} repositories")
         
         for repo in repos:
             owner = repo["owner"]
             name = repo["name"]
             positioning = repo["positioning"]
             
-            logger.info(f"\n{'='*60}")
-            logger.info(f"Processing {owner}/{name} ({positioning})")
-            logger.info(f"{'='*60}")
+            print(f"\n{'='*60}")
+            print(f"Processing {owner}/{name} ({positioning})")
+            print(f"{'='*60}")
             
             # Inserting repo
+            print(f"Task 1/3: Inserting repository metadata")
             repo_id = insert_repo(owner, name, positioning)
             
             # Fetching commits
+            print(f"Task 2/3: Fetching commits from GitHub API")
             commits = fetch_repo_commits(owner, name, max_pages)
             
             # Saving to database
+            print(f"Task 3/3: Saving commits to database")
             save_commits_to_db(commits, repo_id, owner, name)
         
-        logger.info(f"\n{'='*60}")
-        logger.info("Ingestion complete")
-        logger.info(f"{'='*60}")
+        print(f"\n{'='*60}")
+        print("Ingestion complete")
+        print(f"{'='*60}")
         
     except Exception as e:
         logger.error(f"Ingestion failed: {str(e)}")
@@ -167,4 +177,4 @@ def ingest_commits_flow(max_pages: int = 200):
 
 if __name__ == "__main__":
     # Ingesting 200 pages per repo
-    ingest_commits_flow(max_pages=200)   
+    ingest_commits_flow(max_pages=200)

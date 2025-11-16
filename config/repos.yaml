@@ -1,0 +1,25 @@
+repos:
+  - owner: pytorch
+    name: pytorch
+    positioning: performance
+  - owner: scikit-learn
+    name: scikit-learn
+    positioning: performance
+  - owner: numpy
+    name: numpy
+    positioning: performance
+  - owner: polars-rs
+    name: polars
+    positioning: performance
+  - owner: pandas-dev
+    name: pandas
+    positioning: simplicity
+  - owner: matplotlib
+    name: matplotlib
+    positioning: simplicity
+  - owner: mwaskom
+    name: seaborn
+    positioning: simplicity
+  - owner: plotly
+    name: plotly.py
+    positioning: simplicity

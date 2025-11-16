@@ -1,0 +1,11 @@
+prefect
+httpx
+duckdb
+pandas
+pyyaml
+python-dotenv
+matplotlib
+seaborn
+plotly
+tqdm
+jupyter

@@ -26,14 +26,14 @@
 
 **Alternative Hypothesis:** Simplicity-related repositories have a higher proportion of weekend activity than performance-related repositories.
 
-**Reasoning:** Users may contribute PRs and commits (activity) more to simplicity-related repositories on weekends than performance-related repositories, as much of this work can be lighter and less taxing.
+**Reasoning:** Contributors may work on  simplicity-related repositories on weekends than performance-related repositories, as much of this work may be lighter and less taxing.
 
 ---
 
 ### H4: Time Series Trend Hypothesis
 
-**Null Hypothesis:** There is no difference in the ratio of commits to pull requests over time between performance-related and simplicity-related repositories.
+**Null Hypothesis:** There is no difference in the formalization ratio (proportion of activity conducted through pull requests) over time between performance-related and simplicity-related repositories.
 
-**Alternative Hypothesis:** The ratio of pull requests to commits over time increases for performance-related and decreases for simplicity-related repositories.
+**Alternative Hypothesis:** The formalization ratio increases over time for performance-related and decreases for simplicity-related repositories.
 
-**Reasoning:** As machine learning has become more mainstream in recent years, it is possible that the formal review (PRs) has increased compared to direct commits, but we will test this with time series analysis and hypothesis testing.
+**Reasoning:** As machine learning has become more widespread in recent years, it is possible that the formal review (PRs) has increased for performance-related repositories (such as scikit-learn) compared to direct commits,  while it may have decreased for simplicity-related repositories, but we will test this with time series analysis and hypothesis testing.

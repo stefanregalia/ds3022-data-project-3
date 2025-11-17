@@ -36,4 +36,4 @@
 
 **Alternative Hypothesis:** The ratio of pull requests to commits over time increases for performance-related and decreases for simplicity-related repositories.
 
-**Reasoning:** The dynamics of contributions may vary over time between the two types of repositories, but we will test this with time series analysis and hypothesis testing.
+**Reasoning:** As machine learning has become more mainstream in recent years, it is possible that the formal review (PRs) has increased compared to direct commits, but we will test this with time series analysis and hypothesis testing.

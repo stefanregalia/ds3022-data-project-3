@@ -9,3 +9,7 @@ seaborn
 plotly
 tqdm
 jupyter
+textblob
+scipy
+statsmodels
+numpy

@@ -22,11 +22,11 @@
 
 ### H3: Weekend Activity Hypothesis
 
-**Null Hypothesis:** There is no difference in the proportion of weekend activity between performance-related and simplicity-related repositories.
+**Null Hypothesis:** There is no difference in the proportion of weekend activity (weekend activity/total activity) between performance-related and simplicity-related repositories.
 
 **Alternative Hypothesis:** Simplicity-related repositories have a higher proportion of weekend activity than performance-related repositories.
 
-**Reasoning:** Users may contribute more to simplicity-related repositories on weekends than performance-related repositories, as much of this work can be lighter and less taxing.
+**Reasoning:** Users may contribute PRs and commits (activity) more to simplicity-related repositories on weekends than performance-related repositories, as much of this work can be lighter and less taxing.
 
 ---
 

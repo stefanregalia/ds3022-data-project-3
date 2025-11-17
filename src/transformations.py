@@ -9,20 +9,30 @@ from textblob import TextBlob
 from scipy.stats import linregress
 import logging
 from pathlib import Path
-import random
+from datetime import datetime
 
-random.seed(42)  
-np.random.seed(42)
+# Setting up the logger
+PROJECT_ROOT = Path(__file__).parent.parent
+LOGS_DIR = PROJECT_ROOT / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
 
-# Logger setup
+# Create log filename with timestamp
+log_filename = LOGS_DIR / f"transformations_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
+# Configure logging to both file and console
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_filename),
+        logging.StreamHandler()           
+    ]
 )
 logger = logging.getLogger(__name__)
 
+logger.info(f"Logging to: {log_filename}")
+
 # Database path
-PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "data" / "github_evolution.duckdb"
 OUTPUT_DIR = PROJECT_ROOT / "data" / "processed"
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -102,15 +112,9 @@ def calculate_sentiment_scores():
             logger.error("No valid commits found for sentiment analysis")
             raise ValueError("No commits with valid messages found")
         
-        # Sampling commits with n = 5000 for efficiency and to ensure each repo is represented proportionally
-
-        sample_size = min(5000, len(df))
-        df_sample = df.groupby('repo_id', group_keys=False).apply(
-            lambda x: x.sample(min(len(x), sample_size // df['repo_id'].nunique()))
-        )
-        logger.info(f"Analyzing sentiment for {len(df_sample)} sampled commits")
-        
         # Calculate sentiment using TextBlob: -1 (negative) to +1 (positive)
+
+        df_sample = df
 
         def get_sentiment(text):
             try:

@@ -3,15 +3,28 @@
 import duckdb
 import logging
 from pathlib import Path
+from datetime import datetime
 from config import DATA_DIR
 
-# Defining the logger
+# Setting up the logger
+LOGS_DIR = Path(__file__).parent.parent / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
 
+# Create log filename with timestamp
+log_filename = LOGS_DIR / f"init_db_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
+# Configure logging to both file and console
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_filename),
+        logging.StreamHandler()
+    ]
 )
 logger = logging.getLogger(__name__)
+
+logger.info(f"Logging to: {log_filename}")
 
 # Defining the database path
 

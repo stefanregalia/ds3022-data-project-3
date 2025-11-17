@@ -9,6 +9,10 @@ from textblob import TextBlob
 from scipy.stats import linregress
 import logging
 from pathlib import Path
+import random
+
+random.seed(42)  
+np.random.seed(42)
 
 # Logger setup
 logging.basicConfig(

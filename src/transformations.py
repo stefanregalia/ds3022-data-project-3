@@ -312,7 +312,7 @@ def calculate_weekend_activity():
 
 def calculate_temporal_trends():
     """
-    Calculating PR-to-commit ratio over time and trend slopes by aggregating by year and 
+    Calculates PR-to-commit ratio over time and trend slopes by aggregating by year and 
     calculating the ratio of PRs to commits.
     """
     logger.info("Calculating temporal trends")

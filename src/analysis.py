@@ -364,7 +364,7 @@ def main():
         # Save results
         save_results(results)
         
-        logger.info("Statistical analysis complete")
+        logger.info("Statistical analysis completed")
         
     except Exception as e:
         logger.error(f"Analysis pipeline failed: {str(e)}")

@@ -51,7 +51,7 @@ COLORS = {
 
 def load_data():
     """
-    Loading processed metrics and hypothesis results for visualization.
+    Loads processed metrics and hypothesis results for visualization.
     """
     try:
         metrics_path = DATA_DIR / "repo_metrics.csv"

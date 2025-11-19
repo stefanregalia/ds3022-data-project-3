@@ -11,7 +11,7 @@ from pathlib import Path
 import logging
 from datetime import datetime
 
-# Creating logger
+# Creating the logs directory and configuring logging
 PROJECT_ROOT = Path(__file__).parent.parent
 LOGS_DIR = PROJECT_ROOT / "logs"
 LOGS_DIR.mkdir(exist_ok=True)

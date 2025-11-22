@@ -56,7 +56,7 @@ class GitHubClient:
         try:
             response = httpx.get(url, headers=self.headers, params=params, timeout=30.0)
             
-            # Handle rate limiting
+            # Handling rate limiting
             self._handle_rate_limit(response)
             
             # Raise for HTTP errors

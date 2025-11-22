@@ -1,4 +1,4 @@
-# Initializing DuckDB database schema
+# Initializing DuckDB schema
 
 import duckdb
 import logging

@@ -9,7 +9,7 @@ from pathlib import Path
 import logging
 from datetime import datetime
 
-# Creating logger
+# Creating logger object
 PROJECT_ROOT = Path(__file__).parent.parent
 LOGS_DIR = PROJECT_ROOT / "logs"
 LOGS_DIR.mkdir(exist_ok=True)

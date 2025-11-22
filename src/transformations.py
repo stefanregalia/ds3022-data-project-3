@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 
 logger.info(f"Logging to: {log_filename}")
 
-# Database path
+# Defining Database path
 DB_PATH = PROJECT_ROOT / "data" / "github_evolution.duckdb"
 OUTPUT_DIR = PROJECT_ROOT / "data" / "processed"
 OUTPUT_DIR.mkdir(exist_ok=True)

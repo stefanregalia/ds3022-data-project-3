@@ -9,7 +9,7 @@ from config import load_repos, DATA_DIR
 from github_client import client
 import sys
 
-# Setting up the logger
+# Setting up logger
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'

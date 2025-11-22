@@ -37,7 +37,7 @@ def ensure_database_exists():
 
 ensure_database_exists()
 
-# Task definitions
+# Defining tasks
 @task(retries=3, retry_delay_seconds=60)
 def fetch_repo_commits(owner: str, name: str, max_pages: int = 10) -> List[Dict]:
     """Fetching commits for a single repository."""

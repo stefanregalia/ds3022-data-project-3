@@ -5,12 +5,13 @@ import logging
 from pathlib import Path
 from datetime import datetime
 from config import DATA_DIR
+import sys
 
 # Setting up the logger
 LOGS_DIR = Path(__file__).parent.parent / "logs"
 LOGS_DIR.mkdir(exist_ok=True)
 
-# Create log filename with timestamp
+# Creating log filename with timestamp
 log_filename = LOGS_DIR / f"init_db_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 
 # Configure logging to both file and console
@@ -18,16 +19,21 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(log_filename),
-        logging.StreamHandler()
-    ]
+        logging.FileHandler(log_filename, mode='w'),  
+        logging.StreamHandler(sys.stdout)
+    ],
+    force=True
 )
+
 logger = logging.getLogger(__name__)
 
 logger.info(f"Logging to: {log_filename}")
 
-# Defining the database path
+# Forcing flush after logging setup
+for handler in logging.root.handlers:
+    handler.flush()
 
+# Defining the database path
 DB_PATH = DATA_DIR / "github_evolution.duckdb"
 
 def init_database():
@@ -83,6 +89,10 @@ def init_database():
         
         con.close()
         logger.info("Database initialization complete")
+        
+        # Flush at end
+        for handler in logging.root.handlers:
+            handler.flush()
         
     except Exception as e:
         logger.error(f"Database initialization failed: {str(e)}")

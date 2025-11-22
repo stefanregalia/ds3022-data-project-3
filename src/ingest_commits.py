@@ -11,6 +11,7 @@ from github_client import client
 import sys
 
 
+
 # Defining the logger
 logging.basicConfig(
     level=logging.INFO,
@@ -26,7 +27,7 @@ logger.addHandler(handler)
 # Defining the database path
 DB_PATH = DATA_DIR / "github_evolution.duckdb"
 
-# Auto-initialize database 
+# Auto-initializing database 
 def ensure_database_exists():
     """Creating database and tables if they don't exist."""
     if not DB_PATH.exists():
@@ -146,6 +147,8 @@ def ingest_commits_flow(max_pages: int = 200):
         repos = load_repos()
         print(f"Starting ingestion for {len(repos)} repositories")
         
+        logger.info("Starting parallel fetch of all repositories")
+        fetch_futures = []
         for repo in repos:
             owner = repo["owner"]
             name = repo["name"]
